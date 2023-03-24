@@ -1,13 +1,12 @@
 package com.vivekraman.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.domain.Page;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,6 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<T> implements Serializable {
   @Serial
   private static final long serialVersionUID = 8480397197149093465L;
@@ -24,7 +24,19 @@ public class Response<T> implements Serializable {
   private T data;
   private String error;
 
-  public Response(T data) {
+  protected Response(T data) {
     this.data = data;
+  }
+
+  public static <T extends Serializable> Response<T> of(T data) {
+    return new Response<>(data);
+  }
+
+  public static <T extends Serializable> ResponseList<T> of(Page<T> data) {
+    return new ResponseList<>(data);
+  }
+
+  public static Response<Object> error(String error) {
+    return Response.builder().error(error).build();
   }
 }

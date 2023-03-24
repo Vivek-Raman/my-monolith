@@ -1,9 +1,13 @@
 package com.vivekraman.inventory.history.analysis.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,8 +30,17 @@ public class WarehouseInventoryHistoryTransaction implements Serializable {
   private static final long serialVersionUID = -7122852452059825913L;
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
+
+  @Column("analysis_job_fk")
+  @ManyToOne(targetEntity = AnalysisJob.class, fetch = FetchType.LAZY)
+  @JsonBackReference
+  private AnalysisJob analysisJob;
+
+  @Column("inventory_id")
+  private String inventoryIdentifier;
+
 
   @Column("warehouse_merchant_code")
   private String warehouseMerchantCode;
@@ -39,10 +52,10 @@ public class WarehouseInventoryHistoryTransaction implements Serializable {
   private String warehouseCode;
 
   @Column("original_stock")
-  private Double originalStock;
+  private Integer originalStock;
 
   @Column("available_stock")
-  private Double availableStock;
+  private Integer availableStock;
 
   @Column("available_stock_transaction_quantity")
   private Integer availableStockTransactionQuantity;
@@ -60,13 +73,13 @@ public class WarehouseInventoryHistoryTransaction implements Serializable {
   private String uniqueId;
 
   @Column("safety_stock")
-  private Long safetyStock;
+  private Integer safetyStock;
 
   @Column("normal_transaction_fk")
   private String normalTransactionFk;
 
   @Column("transaction_quantity")
-  private Double transactionQuantity;
+  private Integer transactionQuantity;
 
   @Column("customer_logon_id")
   private String customerLogonId;
