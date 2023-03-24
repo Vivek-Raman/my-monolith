@@ -1,7 +1,10 @@
 package com.vivekraman.inventory.history.analysis.controller;
 
 import com.vivekraman.inventory.history.analysis.constants.ApiPath;
+import com.vivekraman.inventory.history.analysis.entity.RuleState;
+import com.vivekraman.inventory.history.analysis.repository.RuleStateRepository;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -18,14 +21,11 @@ import java.io.ByteArrayOutputStream;
 
 @RestController
 @RequestMapping(ApiPath.BASE_URL)
+@RequiredArgsConstructor
 public class AnalysisController implements ApiPath {
 
   private final AnalysisService analysisService;
-
-  @Autowired
-  public AnalysisController(AnalysisService analysisService) {
-    this.analysisService = analysisService;
-  }
+  private final RuleStateRepository ruleStateRepository;
 
   @PostMapping(path = "/filter-txn-history", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   public ResponseEntity<Resource> filterTransactionHistory(
@@ -37,5 +37,11 @@ public class AnalysisController implements ApiPath {
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=" + outputFilename)
         .contentLength(response.size())
         .body(new ByteArrayResource(response.toByteArray()));
+  }
+
+  @PostMapping(path = "/asdasd")
+  public RuleState test() {
+    return ruleStateRepository.save(RuleState.builder()
+        .testKey("asdtest").build());
   }
 }

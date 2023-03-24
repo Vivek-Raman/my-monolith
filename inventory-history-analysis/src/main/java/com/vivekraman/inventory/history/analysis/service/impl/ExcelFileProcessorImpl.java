@@ -2,7 +2,7 @@ package com.vivekraman.inventory.history.analysis.service.impl;
 
 import com.vivekraman.inventory.history.analysis.service.api.ExcelFileHelper;
 import com.vivekraman.inventory.history.analysis.service.api.ExcelFileProcessor;
-import com.vivekraman.inventory.history.analysis.model.WarehouseInventoryHistoryTransaction;
+import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistoryTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;

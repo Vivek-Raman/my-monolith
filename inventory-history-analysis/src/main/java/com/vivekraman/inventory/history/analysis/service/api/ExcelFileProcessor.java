@@ -1,6 +1,6 @@
 package com.vivekraman.inventory.history.analysis.service.api;
 
-import com.vivekraman.inventory.history.analysis.model.WarehouseInventoryHistoryTransaction;
+import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistoryTransaction;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;

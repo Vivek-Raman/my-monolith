@@ -3,7 +3,7 @@ package com.vivekraman.inventory.history.analysis.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
 import com.vivekraman.inventory.history.analysis.service.api.ExcelFileProcessor;
-import com.vivekraman.inventory.history.analysis.model.WarehouseInventoryHistoryTransaction;
+import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistoryTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
