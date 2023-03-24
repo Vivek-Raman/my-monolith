@@ -1,9 +1,7 @@
 package com.vivekraman.config;
 
-import com.vivekraman.MyMonolithApplication;
+import com.vivekraman.MyMonolith;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
@@ -12,7 +10,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(MyMonolithApplication.class);
+		return application.sources(MyMonolith.class);
 	}
 
 }

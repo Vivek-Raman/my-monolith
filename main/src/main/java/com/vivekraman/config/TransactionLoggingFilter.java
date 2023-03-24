@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 @Component
 @Slf4j
+@ConditionalOnProperty("${false}")
 public class TransactionLoggingFilter implements WebMvcConfigurer, HandlerInterceptor {
   @Autowired
   private ObjectMapper objectMapper;
@@ -37,7 +39,6 @@ public class TransactionLoggingFilter implements WebMvcConfigurer, HandlerInterc
   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
       @Nullable ModelAndView modelAndView) throws Exception {
     log.debug("API Response! Response {}", new ResponseLog(request, response).toJSON(objectMapper));
-
     HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
   }
 
@@ -48,7 +49,6 @@ public class TransactionLoggingFilter implements WebMvcConfigurer, HandlerInterc
   }
 
   @Data
-  @Builder
   @NoArgsConstructor
   @AllArgsConstructor
   public static class RequestLog {
@@ -70,7 +70,6 @@ public class TransactionLoggingFilter implements WebMvcConfigurer, HandlerInterc
 
   @Data
   @EqualsAndHashCode(callSuper = true)
-  @SuperBuilder
   @NoArgsConstructor
   @AllArgsConstructor
   public static class ResponseLog extends RequestLog {

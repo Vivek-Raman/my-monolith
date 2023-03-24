@@ -1,6 +1,6 @@
 package com.vivekraman.inventory.history.analysis.controller;
 
-import com.vivekraman.constants.ApiPath;
+import com.vivekraman.inventory.history.analysis.constants.ApiPath;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;

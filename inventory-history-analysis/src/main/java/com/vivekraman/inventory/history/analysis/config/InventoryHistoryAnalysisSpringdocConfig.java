@@ -1,19 +1,18 @@
 package com.vivekraman.inventory.history.analysis.config;
 
-import com.vivekraman.config.SpringdocConfig;
-import org.springdoc.core.properties.SpringDocConfigProperties;
-import org.springframework.stereotype.Component;
+import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
+@Configuration
+public class InventoryHistoryAnalysisSpringdocConfig {
+  private static final String API_GROUP = "inventory-history-analysis";
 
-@Component
-public class InventoryHistoryAnalysisSpringdocConfig implements SpringdocConfig.ApiGroup {
-  @Override
-  public SpringDocConfigProperties.GroupConfig apiGroup() {
-    SpringDocConfigProperties.GroupConfig groupConfig = new SpringDocConfigProperties.GroupConfig();
-    groupConfig.setDisplayName("inventory-history-analysis");
-    groupConfig.setPackagesToScan(Collections.singletonList(
-        "com.vivekraman.inventory.history.analysis.controller"));
-    return groupConfig;
+  @Bean
+  public GroupedOpenApi inventoryHistoryAnalysisApiGroup() {
+    return GroupedOpenApi.builder()
+        .group(API_GROUP)
+        .packagesToScan("com.vivekraman.inventory.history.analysis.controller")
+        .build();
   }
 }
