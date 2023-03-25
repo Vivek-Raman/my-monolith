@@ -6,6 +6,7 @@ import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistor
 import com.vivekraman.inventory.history.analysis.model.WarehouseInventoryIdentifier;
 import com.vivekraman.inventory.history.analysis.repository.WarehouseInventoryHistoryTransactionRepository;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisJobService;
+import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
 import com.vivekraman.inventory.history.analysis.service.api.FileIngestService;
 import com.vivekraman.model.Response;
 import com.vivekraman.model.ResponseList;
@@ -16,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class AnalysisController implements ApiPath {
   private final FileIngestService fileIngestService;
+  private final AnalysisService analysisService;
   private final AnalysisJobService analysisJobService;
   private final WarehouseInventoryHistoryTransactionRepository txnRepository;
 
@@ -37,6 +38,7 @@ public class AnalysisController implements ApiPath {
       @RequestPart("txnHistoryFile") MultipartFile txnHistoryFile) throws Exception {
     AnalysisJob job = this.analysisJobService.initiateIngest(inventory, txnHistoryFile.getName());
     this.fileIngestService.ingestHistoryLogFile(job, txnHistoryFile);
+    this.analysisService.analyzeAsync(inventory.generateIdentifier());
     job = this.analysisJobService.initiateAnalysis(inventory);
     return Response.of(job);
   }

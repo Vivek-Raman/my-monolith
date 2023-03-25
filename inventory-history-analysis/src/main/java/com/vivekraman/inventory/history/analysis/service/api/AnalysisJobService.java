@@ -7,4 +7,6 @@ public interface AnalysisJobService {
   AnalysisJob initiateIngest(WarehouseInventoryIdentifier inventory, String fileName);
   AnalysisJob initiateAnalysis(WarehouseInventoryIdentifier inventory);
   AnalysisJob findByIdentifier(WarehouseInventoryIdentifier inventory);
+
+  AnalysisJob completeAnalysis(String inventoryIdentifier);
 }

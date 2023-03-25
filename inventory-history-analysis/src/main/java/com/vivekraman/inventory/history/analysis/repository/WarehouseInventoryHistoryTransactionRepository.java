@@ -11,4 +11,7 @@ public interface WarehouseInventoryHistoryTransactionRepository
     extends CrudRepository<WarehouseInventoryHistoryTransaction, String> {
   Page<WarehouseInventoryHistoryTransaction> findByUniqueIdStartsWith(String uniqueIdSearchQuery,
       Pageable pageable);
+
+  Page<WarehouseInventoryHistoryTransaction> findByInventoryIdentifierOrderByTransactionDate(
+     String inventoryIdentifier, Pageable pageable);
 }

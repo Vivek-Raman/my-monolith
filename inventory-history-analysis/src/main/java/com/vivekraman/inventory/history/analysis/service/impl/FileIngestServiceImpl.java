@@ -70,8 +70,6 @@ public class FileIngestServiceImpl implements FileIngestService {
     AtomicInteger failureCount = new AtomicInteger(0);
     while (iterator.hasNext()) {
       WarehouseInventoryHistoryTransaction txn = null;
-      txn.setAnalysisJob(job);
-      txn.setInventoryIdentifier(job.getId());
       try {
         txn = iterator.next();
         if (processedRowCount.getAndIncrement() % 10 == 0) {
@@ -89,6 +87,8 @@ public class FileIngestServiceImpl implements FileIngestService {
         }
       }
       if (Objects.nonNull(txn)) {
+        txn.setAnalysisJob(job);
+        txn.setInventoryIdentifier(job.getId());
         this.txnRepository.save(txn);
       }
     }

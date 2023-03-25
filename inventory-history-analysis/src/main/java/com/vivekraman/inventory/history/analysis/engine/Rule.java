@@ -4,4 +4,7 @@ import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistor
 
 public interface Rule {
   boolean onScan(WarehouseInventoryHistoryTransaction txn);
+  default boolean isActive() {
+    return true;
+  }
 }
