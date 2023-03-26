@@ -41,6 +41,8 @@ public class WarehouseInventoryHistoryTransaction implements Serializable {
   @Column("inventory_id")
   private String inventoryIdentifier;
 
+  @Column("transaction_primary_key")
+  private String transactionPrimaryKey;
 
   @Column("warehouse_merchant_code")
   private String warehouseMerchantCode;

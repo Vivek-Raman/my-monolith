@@ -32,7 +32,7 @@ public class FileIngestServiceImpl implements FileIngestService {
     String fileName = file.getOriginalFilename();
 
     CsvSchema schema = CsvSchema.builder()
-        .addColumn("txnPkey")
+        .addColumn("transactionPrimaryKey")
         .addColumn("class")
         .addColumn("warehouseCode")
         .addColumn("warehouseItemSku")

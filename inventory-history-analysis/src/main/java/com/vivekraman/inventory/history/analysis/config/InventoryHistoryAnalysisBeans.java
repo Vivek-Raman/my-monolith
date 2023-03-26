@@ -15,12 +15,6 @@ import java.util.concurrent.Executors;
 @PropertySource("classpath:" + ApiPath.MODULE_NAME + ".properties")
 public class InventoryHistoryAnalysisBeans {
   @Bean
-  public ObjectMapper objectMapperJKT() {
-    return new ObjectMapper().setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aa"))
-        .setTimeZone(TimeZone.getTimeZone("JKT"));
-  }
-
-  @Bean
   public ExecutorService inventoryHistoryAnalysisThreadPoolExecutorService() {
     return Executors.newFixedThreadPool(10);
   }

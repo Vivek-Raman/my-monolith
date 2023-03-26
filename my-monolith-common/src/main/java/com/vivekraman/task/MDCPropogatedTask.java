@@ -1,4 +1,4 @@
-package com.vivekraman.inventory.history.analysis.config;
+package com.vivekraman.task;
 
 import org.slf4j.MDC;
 

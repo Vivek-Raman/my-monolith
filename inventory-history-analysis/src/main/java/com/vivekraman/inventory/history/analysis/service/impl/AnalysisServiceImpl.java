@@ -1,14 +1,14 @@
 package com.vivekraman.inventory.history.analysis.service.impl;
 
 import com.vivekraman.inventory.history.analysis.config.InventoryHistoryAnalysisProperties;
-import com.vivekraman.inventory.history.analysis.config.MDCPropogatedTask;
+import com.vivekraman.task.MDCPropogatedTask;
 import com.vivekraman.inventory.history.analysis.engine.Rule;
+import com.vivekraman.inventory.history.analysis.entity.AnalysisJob;
 import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistoryTransaction;
 import com.vivekraman.inventory.history.analysis.repository.WarehouseInventoryHistoryTransactionRepository;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisJobService;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Service
@@ -61,46 +61,60 @@ public class AnalysisServiceImpl implements AnalysisService, InitializingBean,
   }
 
   @Override
-  public void analyzeAsync(String inventoryIdentifier) {
+  public void analyzeAsync(AnalysisJob job, String inventoryIdentifier) {
     this.executorService.execute(new MDCPropogatedTask() {
       @Override
       public void execute() {
-        analyze(inventoryIdentifier);
+        analyze(job, inventoryIdentifier);
       }
     });
   }
 
-  public void analyze(String inventoryIdentifier) {
+  @Override
+  public void analyze(AnalysisJob job, String inventoryIdentifier) {
     Pageable pageRequest = PageRequest.of(0, props.getAnalysisBatchSize());
 
     Page<WarehouseInventoryHistoryTransaction> page =
         this.txnRepository.findByInventoryIdentifierOrderByTransactionDate(
             inventoryIdentifier, pageRequest);
 
+    AtomicInteger txnProcessedCount = new AtomicInteger(0);
     do {
       List<CompletableFuture<Boolean>> futures =  new ArrayList<>(page.getSize());
-
-      Map<String, String> mdcContext = MDC.getCopyOfContextMap();
       for (WarehouseInventoryHistoryTransaction txn : page.getContent()) {
         for (Rule rule : rules) {
-          CompletableFuture<Boolean> completableFuture =
-              CompletableFuture.supplyAsync(() -> {
-                MDC.setContextMap(mdcContext);
-                return rule.onScan(txn);
-              }, threadPoolExecutorService);
-          futures.add(completableFuture);
+          futures.add(buildRuleProcessingTask(rule, job, txn));
         }
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
             .thenApply(v -> futures.stream().map(CompletableFuture::join).toList()).join();
+        if (txnProcessedCount.incrementAndGet() % 20 == 0) {
+          log.info("Analyzed {} of {} transactions.", txnProcessedCount.get(), page.getTotalElements());
+        }
       }
 
-      pageRequest = page.nextPageable();
+      pageRequest = PageRequest.of(pageRequest.getPageNumber() + 1, pageRequest.getPageSize());
       page = this.txnRepository.findByInventoryIdentifierOrderByTransactionDate(
           inventoryIdentifier, pageRequest);
     } while (page.hasContent());
 
+    log.info("Completed analysis: {} of {} transactions.", txnProcessedCount.get(), page.getTotalElements());
     this.analysisJobService.completeAnalysis(inventoryIdentifier);
+  }
+
+  private CompletableFuture<Boolean> buildRuleProcessingTask(
+      Rule rule, AnalysisJob job, WarehouseInventoryHistoryTransaction txn) {
+    return CompletableFuture.supplyAsync(() -> {
+      try {
+        if (rule.validateForRule(txn)) {
+          return rule.onScan(job, txn);
+        }
+      } catch (Exception e) {
+        log.error("Failed to analyze! TxnID {}, InventoryIdentifier {}, Rule {} ",
+            txn.getTransactionPrimaryKey(), txn.getInventoryIdentifier(), rule.ruleID(), e);
+      }
+      return true;
+    }, threadPoolExecutorService);
   }
 
   @Override

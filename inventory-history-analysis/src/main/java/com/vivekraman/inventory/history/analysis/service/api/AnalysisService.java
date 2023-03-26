@@ -1,7 +1,9 @@
 package com.vivekraman.inventory.history.analysis.service.api;
 
-public interface AnalysisService {
-  void analyzeAsync(String inventoryIdentifier);
+import com.vivekraman.inventory.history.analysis.entity.AnalysisJob;
 
-  void analyze(String inventoryIdentifier);
+public interface AnalysisService {
+  void analyzeAsync(AnalysisJob job, String inventoryIdentifier);
+
+  void analyze(AnalysisJob job, String inventoryIdentifier);
 }

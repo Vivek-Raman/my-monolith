@@ -1,10 +1,13 @@
 package com.vivekraman.inventory.history.analysis.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +33,20 @@ public class RuleState implements Serializable {
   @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
 
-  @Column("test_key")
-  private String testKey;
+  @Column("rule_id")
+  private String ruleId;
+
+  @Column("inventory_id")
+  private String inventoryIdentifier;
+
+  @Column("analysis_job_fk")
+  @ManyToOne(targetEntity = AnalysisJob.class, fetch = FetchType.LAZY)
+  @JsonBackReference
+  private AnalysisJob analysisJob;
+
+  @Column("state_key")
+  private String stateKey;
+
+  @Column
+  private String stateMetadataJson;
 }

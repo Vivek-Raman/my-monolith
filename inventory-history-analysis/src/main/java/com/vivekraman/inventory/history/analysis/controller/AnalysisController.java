@@ -2,8 +2,10 @@ package com.vivekraman.inventory.history.analysis.controller;
 
 import com.vivekraman.inventory.history.analysis.constants.ApiPath;
 import com.vivekraman.inventory.history.analysis.entity.AnalysisJob;
+import com.vivekraman.inventory.history.analysis.entity.RuleState;
 import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistoryTransaction;
 import com.vivekraman.inventory.history.analysis.model.WarehouseInventoryIdentifier;
+import com.vivekraman.inventory.history.analysis.repository.RuleStateRepository;
 import com.vivekraman.inventory.history.analysis.repository.WarehouseInventoryHistoryTransactionRepository;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisJobService;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
@@ -30,7 +32,7 @@ public class AnalysisController implements ApiPath {
   private final FileIngestService fileIngestService;
   private final AnalysisService analysisService;
   private final AnalysisJobService analysisJobService;
-  private final WarehouseInventoryHistoryTransactionRepository txnRepository;
+  private final RuleStateRepository ruleStateRepository;
 
   @PostMapping(path = PROCESS_AUDIT_LOGS + INITIATE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   public Response<AnalysisJob> initiateAnalysis(
@@ -38,8 +40,8 @@ public class AnalysisController implements ApiPath {
       @RequestPart("txnHistoryFile") MultipartFile txnHistoryFile) throws Exception {
     AnalysisJob job = this.analysisJobService.initiateIngest(inventory, txnHistoryFile.getName());
     this.fileIngestService.ingestHistoryLogFile(job, txnHistoryFile);
-    this.analysisService.analyzeAsync(inventory.generateIdentifier());
     job = this.analysisJobService.initiateAnalysis(inventory);
+    this.analysisService.analyzeAsync(job, inventory.generateIdentifier());
     return Response.of(job);
   }
 
@@ -50,9 +52,8 @@ public class AnalysisController implements ApiPath {
   }
 
   @GetMapping(path = "/check-db")
-  public ResponseList<WarehouseInventoryHistoryTransaction> checkDB(@RequestParam(required = false) String id) {
-    Page<WarehouseInventoryHistoryTransaction> txns = txnRepository.findByUniqueIdStartsWith(
-        StringUtils.defaultString(id, "1"), PageRequest.of(0, 15));
-    return Response.of(txns);
+  public ResponseList<RuleState> checkDB(@RequestParam(required = false) String id) {
+    Page<RuleState> states = ruleStateRepository.findAll(PageRequest.of(0, 30));
+    return Response.of(states);
   }
 }
