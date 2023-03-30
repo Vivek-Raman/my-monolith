@@ -3,6 +3,7 @@ package com.vivekraman.inventory.history.analysis.engine;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vivekraman.inventory.history.analysis.entity.RuleState;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public abstract class RuleMetadata implements Serializable {
 
   protected static <T> T readFromRuleState(ObjectMapper mapper, RuleState state,
       Class<T> clazz) throws Exception {
+    if (StringUtils.isBlank(state.getStateMetadataJson())) return null;
     return mapper.readValue(state.getStateMetadataJson(), clazz);
   }
 

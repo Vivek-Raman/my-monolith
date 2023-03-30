@@ -11,5 +11,5 @@ public interface RuleStateRepository extends CrudRepository<RuleState, String> {
   RuleState findByRuleIdAndInventoryIdentifierAndStateKey(String ruleID,
       String inventoryIdentifier, String stateKey);
 
-  Page<RuleState> findAll(Pageable pageable);
+  Page<RuleState> findAllByRuleIdAndIgnoreEndStateFalse(String ruleID, Pageable pageable);
 }

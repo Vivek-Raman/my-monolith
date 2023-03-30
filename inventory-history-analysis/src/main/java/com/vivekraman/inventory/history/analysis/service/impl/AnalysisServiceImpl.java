@@ -89,7 +89,7 @@ public class AnalysisServiceImpl implements AnalysisService, InitializingBean,
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
             .thenApply(v -> futures.stream().map(CompletableFuture::join).toList()).join();
         if (txnProcessedCount.incrementAndGet() % 20 == 0) {
-          log.info("Analyzed {} of {} transactions.", txnProcessedCount.get(), page.getTotalElements());
+          log.debug("Analyzed {} of {} transactions.", txnProcessedCount.get(), page.getTotalElements());
         }
       }
 

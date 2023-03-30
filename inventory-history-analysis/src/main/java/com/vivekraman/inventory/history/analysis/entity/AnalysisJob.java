@@ -1,11 +1,8 @@
 package com.vivekraman.inventory.history.analysis.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +13,6 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Builder
@@ -40,8 +36,4 @@ public class AnalysisJob implements Serializable {
 
   @Column("status")
   private String status;
-
-  @JsonIgnore
-  @OneToMany(targetEntity = WarehouseInventoryHistoryTransaction.class, fetch = FetchType.LAZY)
-  private List<WarehouseInventoryHistoryTransaction> transactions;
 }

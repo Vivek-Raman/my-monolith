@@ -2,6 +2,7 @@ package com.vivekraman.inventory.history.analysis.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class WarehouseInventoryHistoryTransaction implements Serializable {
   private String id;
 
   @Column("analysis_job_fk")
-  @ManyToOne(targetEntity = AnalysisJob.class, fetch = FetchType.LAZY)
+  @ManyToOne(targetEntity = AnalysisJob.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
   @JsonBackReference
   private AnalysisJob analysisJob;
 

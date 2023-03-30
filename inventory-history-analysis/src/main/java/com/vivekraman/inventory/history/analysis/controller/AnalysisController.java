@@ -3,20 +3,19 @@ package com.vivekraman.inventory.history.analysis.controller;
 import com.vivekraman.inventory.history.analysis.constants.ApiPath;
 import com.vivekraman.inventory.history.analysis.entity.AnalysisJob;
 import com.vivekraman.inventory.history.analysis.entity.RuleState;
-import com.vivekraman.inventory.history.analysis.entity.WarehouseInventoryHistoryTransaction;
 import com.vivekraman.inventory.history.analysis.model.WarehouseInventoryIdentifier;
 import com.vivekraman.inventory.history.analysis.repository.RuleStateRepository;
-import com.vivekraman.inventory.history.analysis.repository.WarehouseInventoryHistoryTransactionRepository;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisJobService;
 import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
+import com.vivekraman.inventory.history.analysis.service.api.DBCleanupService;
 import com.vivekraman.inventory.history.analysis.service.api.FileIngestService;
 import com.vivekraman.model.Response;
 import com.vivekraman.model.ResponseList;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +32,7 @@ public class AnalysisController implements ApiPath {
   private final AnalysisService analysisService;
   private final AnalysisJobService analysisJobService;
   private final RuleStateRepository ruleStateRepository;
+  private final DBCleanupService dbCleanupService;
 
   @PostMapping(path = PROCESS_AUDIT_LOGS + INITIATE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   public Response<AnalysisJob> initiateAnalysis(
@@ -52,8 +52,15 @@ public class AnalysisController implements ApiPath {
   }
 
   @GetMapping(path = "/check-db")
-  public ResponseList<RuleState> checkDB(@RequestParam(required = false) String id) {
-    Page<RuleState> states = ruleStateRepository.findAll(PageRequest.of(0, 30));
+  public ResponseList<RuleState> checkDB(@RequestParam(required = false) String ruleID) {
+    Page<RuleState> states = ruleStateRepository.findAllByRuleIdAndIgnoreEndStateFalse(
+        PageRequest.of(0, 100));
     return Response.of(states);
+  }
+
+  @DeleteMapping(path = "/clear-db")
+  public Response<Boolean> clearDB(@RequestParam(required = false) String id) {
+    dbCleanupService.cleanupDB();
+    return Response.of(true);
   }
 }
