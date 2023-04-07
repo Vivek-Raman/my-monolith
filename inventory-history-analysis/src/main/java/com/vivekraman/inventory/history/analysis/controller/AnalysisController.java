@@ -54,7 +54,7 @@ public class AnalysisController implements ApiPath {
   @GetMapping(path = "/check-db")
   public ResponseList<RuleState> checkDB(@RequestParam(required = false) String ruleID) {
     Page<RuleState> states = ruleStateRepository.findAllByRuleIdAndIgnoreEndStateFalse(
-        PageRequest.of(0, 100));
+        ruleID, PageRequest.of(0, 100));
     return Response.of(states);
   }
 

@@ -1,6 +1,6 @@
-package com.vivekraman.inventory.history.analysis.config;
+package com.vivekraman.terrarium.config;
 
-import com.vivekraman.inventory.history.analysis.constants.ApiPath;
+import com.vivekraman.terrarium.constants.ApiPath;
 import lombok.Data;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,7 +11,6 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @ConfigurationProperties(prefix = ApiPath.MODULE_NAME)
 @PropertySource("classpath:" + ApiPath.MODULE_NAME + ".properties")
-public class InventoryHistoryAnalysisProperties {
+public class TerrariumProperties {
   private DataSourceProperties dataSource;
-  private int analysisBatchSize;
 }
