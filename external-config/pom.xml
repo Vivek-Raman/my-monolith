@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>main</artifactId>
+  <artifactId>external-config</artifactId>
 
   <properties>
     <maven.compiler.source>19</maven.compiler.source>
@@ -18,24 +18,10 @@
   </properties>
 
   <dependencies>
-
-    <!-- Import all the modules here -->
     <dependency>
       <groupId>com.vivekraman</groupId>
       <artifactId>my-monolith-common</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>inventory-history-analysis</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>terrarium</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>external-config</artifactId>
-    </dependency>
-  </dependencies>
 
+  </dependencies>
 </project>
