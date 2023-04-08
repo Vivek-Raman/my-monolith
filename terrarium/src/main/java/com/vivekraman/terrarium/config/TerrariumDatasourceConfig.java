@@ -1,27 +1,39 @@
 package com.vivekraman.terrarium.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@EnableJdbcRepositories(basePackages = "com.vivekraman.terrarium.repository",
-                        jdbcOperationsRef = "terrariumJdbcTemplate")
-public class TerrariumDatasourceConfig extends AbstractJdbcConfiguration {
+@EnableJpaRepositories(basePackages = "com.vivekraman.terrarium.repository",
+                       entityManagerFactoryRef = "terrariumEntityManagerFactory",
+                       transactionManagerRef = "terrariumTransactionManager")
+public class TerrariumDatasourceConfig {
   @Bean
   public DataSource terrariumDataSource(TerrariumProperties moduleProps) {
     return moduleProps.getDataSource().initializeDataSourceBuilder().build();
   }
 
   @Bean
-  public NamedParameterJdbcOperations terrariumJdbcTemplate(
-      @Qualifier("terrariumDataSource") DataSource dataSource) {
-    return new NamedParameterJdbcTemplate(dataSource);
+  public LocalContainerEntityManagerFactoryBean terrariumEntityManagerFactory(
+      EntityManagerFactoryBuilder builder, @Qualifier("terrariumDataSource") DataSource dataSource) {
+    return builder.dataSource(dataSource)
+        .packages("com.vivekraman.terrarium.entity")
+        .persistenceUnit("terrarium")
+        .build();
+  }
+
+  @Bean
+  public TransactionManager terrariumTransactionManager(
+      @Qualifier("terrariumEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+    return new JpaTransactionManager(entityManagerFactory);
   }
 }

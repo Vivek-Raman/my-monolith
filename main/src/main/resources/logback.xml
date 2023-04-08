@@ -2,6 +2,7 @@
   <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <pattern>[%X{key}] %date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC+0530} %-5level %logger{35} @L%L - %msg %n</pattern>
+<!--      <pattern>[%X{key}] %date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC+0530} %-5level %logger{35} @L%L - %msg %replace(%xException){'[&lt;&gt;\r\n\t]+',' '}%nopex %n</pattern> -->
     </encoder>
   </appender>
 
@@ -10,7 +11,11 @@
     <appender-ref ref="stdout" />
   </logger>
 
-  <root level="info">
+  <logger name="com.vivekraman" level="info">
+<!--    <appender-ref ref="stdout" />-->
+  </logger>
+
+  <root level="warn">
     <appender-ref ref="stdout" />
   </root>
 </configuration>

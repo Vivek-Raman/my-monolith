@@ -1,27 +1,40 @@
 package com.vivekraman.inventory.history.analysis.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@EnableJdbcRepositories(basePackages = "com.vivekraman.inventory.history.analysis.repository",
-                        jdbcOperationsRef = "inventoryHistoryAnalysisJdbcTemplate")
-public class InventoryHistoryAnalysisDatasourceConfig extends AbstractJdbcConfiguration {
+@EnableJpaRepositories(basePackages = "com.vivekraman.inventory.history.analysis.repository",
+                       entityManagerFactoryRef = "inventoryHistoryAnalysisEntityManagerFactory",
+                       transactionManagerRef = "inventoryHistoryAnalysisTransactionManager")
+public class InventoryHistoryAnalysisDatasourceConfig {
   @Bean
   public DataSource inventoryHistoryAnalysisDataSource(InventoryHistoryAnalysisProperties moduleProps) {
     return moduleProps.getDataSource().initializeDataSourceBuilder().build();
   }
 
   @Bean
-  public NamedParameterJdbcOperations inventoryHistoryAnalysisJdbcTemplate(
+  public LocalContainerEntityManagerFactoryBean inventoryHistoryAnalysisEntityManagerFactory(
+      EntityManagerFactoryBuilder builder,
       @Qualifier("inventoryHistoryAnalysisDataSource") DataSource dataSource) {
-    return new NamedParameterJdbcTemplate(dataSource);
+    return builder.dataSource(dataSource)
+        .packages("com.vivekraman.inventory.history.analysis.entity")
+        .persistenceUnit("inventoryHistoryAnalysis")
+        .build();
+  }
+
+  @Bean
+  public TransactionManager inventoryHistoryAnalysisTransactionManager(
+      @Qualifier("inventoryHistoryAnalysisEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+    return new JpaTransactionManager(entityManagerFactory);
   }
 }

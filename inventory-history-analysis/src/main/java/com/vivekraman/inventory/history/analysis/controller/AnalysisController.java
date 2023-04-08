@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(ApiPath.BASE_URL)
 @RequiredArgsConstructor
@@ -52,7 +54,7 @@ public class AnalysisController implements ApiPath {
   }
 
   @GetMapping(path = "/check-db")
-  public ResponseList<RuleState> checkDB(@RequestParam(required = false) String ruleID) {
+  public Response<List<RuleState>> checkDB(@RequestParam(required = false) String ruleID) {
     Page<RuleState> states = ruleStateRepository.findAllByRuleIdAndIgnoreEndStateFalse(
         ruleID, PageRequest.of(0, 100));
     return Response.of(states);
