@@ -18,7 +18,8 @@
 		<module>main</module>
 		<module>my-monolith-common</module>
 		<module>inventory-history-analysis</module>
-	</modules>
+    <module>terrarium</module>
+  </modules>
 	<properties>
 		<java.version>19</java.version>
 		<apache-poi.version>5.2.2</apache-poi.version>
@@ -48,13 +49,18 @@
 				<artifactId>inventory-history-analysis</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.vivekraman</groupId>
+				<artifactId>terrarium</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 		<dependency>
       <groupId>org.springframework.boot</groupId>
@@ -85,6 +91,10 @@
 			<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+	  <dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>

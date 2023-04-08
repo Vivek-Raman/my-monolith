@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Builder
@@ -32,7 +33,7 @@ public class Response<T> implements Serializable {
     return new Response<>(data);
   }
 
-  public static <T extends Serializable> ResponseList<T> of(Page<T> data) {
+  public static <T extends Serializable> Response<List<T>> of(Page<T> data) {
     return new ResponseList<>(data);
   }
 

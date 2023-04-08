@@ -9,28 +9,21 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>main</artifactId>
+  <artifactId>terrarium</artifactId>
 
   <properties>
-    <maven.compiler.source>19</maven.compiler.source>
-    <maven.compiler.target>19</maven.compiler.target>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
   <dependencies>
-
-    <!-- Import all the modules here -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
     <dependency>
       <groupId>com.vivekraman</groupId>
       <artifactId>my-monolith-common</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>inventory-history-analysis</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>terrarium</artifactId>
     </dependency>
   </dependencies>
 
