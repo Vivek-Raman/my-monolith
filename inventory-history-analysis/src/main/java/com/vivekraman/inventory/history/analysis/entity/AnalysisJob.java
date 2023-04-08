@@ -1,14 +1,16 @@
 package com.vivekraman.inventory.history.analysis.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -28,12 +30,12 @@ public class AnalysisJob implements Serializable {
   @Id
   private String id;
 
-  @Column("file_name")
+  @Column(name = "file_name")
   private String fileName;
 
-  @Column("start_time")
+  @Column(name = "start_time")
   private Date startTime;
 
-  @Column("status")
+  @Column(name = "status")
   private String status;
 }

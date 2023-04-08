@@ -3,9 +3,9 @@ package com.vivekraman.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,6 +13,9 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 public class ResponseList<T extends Serializable> extends Response<List<T>> implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 3989783766243646883L;
+
   private Integer page;
   private Integer size;
   private Long total;
