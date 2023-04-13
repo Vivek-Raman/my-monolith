@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>main</artifactId>
+  <artifactId>fix-subscription-dates</artifactId>
 
   <properties>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -18,32 +18,13 @@
   </properties>
 
   <dependencies>
-
-    <!-- Import all the modules here -->
     <dependency>
       <groupId>com.vivekraman</groupId>
       <artifactId>my-monolith-common</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>inventory-history-analysis</artifactId>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-csv</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>terrarium</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>external-config</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.vivekraman</groupId>
-      <artifactId>fix-subscription-dates</artifactId>
-    </dependency>
-<!--    <dependency>-->
-<!--      <groupId>com.vivekraman</groupId>-->
-<!--      <artifactId>module-empty-template</artifactId>-->
-<!--    </dependency>-->
   </dependencies>
-
 </project>

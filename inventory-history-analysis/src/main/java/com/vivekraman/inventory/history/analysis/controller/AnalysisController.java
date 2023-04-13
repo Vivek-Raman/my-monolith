@@ -10,7 +10,6 @@ import com.vivekraman.inventory.history.analysis.service.api.AnalysisService;
 import com.vivekraman.inventory.history.analysis.service.api.DBCleanupService;
 import com.vivekraman.inventory.history.analysis.service.api.FileIngestService;
 import com.vivekraman.model.Response;
-import com.vivekraman.model.ResponseList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
