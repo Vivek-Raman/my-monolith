@@ -26,4 +26,11 @@ public class ResponseList<T extends Serializable> extends Response<List<T>> impl
     this.size = data.getSize();
     this.total = data.getTotalElements();
   }
+
+  public ResponseList(List<T> data) {
+    super(data);
+    this.page = 0;
+    this.size = data.size();
+    this.total = Integer.toUnsignedLong(data.size());
+  }
 }

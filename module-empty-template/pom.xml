@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>external-config</artifactId>
+  <artifactId>module-empty-template</artifactId>
 
   <properties>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -22,6 +22,5 @@
       <groupId>com.vivekraman</groupId>
       <artifactId>my-monolith-common</artifactId>
     </dependency>
-
   </dependencies>
 </project>

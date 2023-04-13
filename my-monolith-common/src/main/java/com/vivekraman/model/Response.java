@@ -37,6 +37,10 @@ public class Response<T> implements Serializable {
     return new ResponseList<>(data);
   }
 
+  public static <T extends Serializable> Response<List<T>> of(List<T> data) {
+    return new ResponseList<>(data);
+  }
+
   public static Response<Object> error(String error) {
     return Response.builder().error(error).build();
   }

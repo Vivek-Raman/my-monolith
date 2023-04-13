@@ -20,9 +20,10 @@
 		<module>my-monolith-common</module>
 		<module>inventory-history-analysis</module>
     <module>terrarium</module>
+    <!--		<module>module-empty-template</module>-->
   </modules>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>20</java.version>
 		<apache-poi.version>5.2.2</apache-poi.version>
 		<springdoc.version>2.0.4</springdoc.version>
 	</properties>
@@ -60,6 +61,11 @@
 				<artifactId>external-config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>com.vivekraman</groupId>-->
+<!--				<artifactId>module-empty-template</artifactId>-->
+<!--				<version>${project.version}</version>-->
+<!--			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 
