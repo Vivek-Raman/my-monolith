@@ -21,4 +21,5 @@ public class UpdateQueries implements Serializable {
 
   private List<String> dateUpdateQueries;
   private List<String> failScheduleQueries;
+  private Integer untouchedSchedules;
 }

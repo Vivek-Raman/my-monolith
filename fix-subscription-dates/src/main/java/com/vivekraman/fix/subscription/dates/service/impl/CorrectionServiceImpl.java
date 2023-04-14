@@ -33,6 +33,7 @@ public class CorrectionServiceImpl implements CorrectionService {
   public UpdateQueries prepareQueries() {
     List<String> updateQueries = new ArrayList<>();
     List<String> failQueries = new ArrayList<>();
+    int untouchedScheduleCount = 0;
 
     List<ScheduleInfo> toCorrect = this.scheduleInfoRepository.findAll();
     for (ScheduleInfo scheduleInfo : toCorrect) {
@@ -49,6 +50,7 @@ public class CorrectionServiceImpl implements CorrectionService {
         log.warn("Schedule {} of Subscription {} already matches the expected date! {}",
             scheduleInfo.getScheduleId(), scheduleInfo.getSubscriptionId(),
             DateHelper.buildISO8601DateString(scheduleInfo.getOrderProcessingDate()));
+        untouchedScheduleCount++;
         subscriptionInfo.incrementScheduleCounter();
         subscriptionInfo = this.subscriptionInfoRepository.save(subscriptionInfo);
         continue;
@@ -84,7 +86,8 @@ public class CorrectionServiceImpl implements CorrectionService {
 
     return UpdateQueries.builder()
         .dateUpdateQueries(updateQueries)
-//        .failScheduleQueries(failQueries) TODO: prepare fail-schedule query first
+        .failScheduleQueries(failQueries)
+        .untouchedSchedules(untouchedScheduleCount)
         .build();
   }
 

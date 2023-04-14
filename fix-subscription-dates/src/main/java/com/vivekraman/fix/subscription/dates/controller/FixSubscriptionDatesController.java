@@ -24,7 +24,6 @@ public class FixSubscriptionDatesController implements ApiPath {
   public Response<UpdateQueries> process(
       @RequestPart("subsInfoFile") MultipartFile subsInfoFile,
     @RequestPart("scheduleInfoFile") MultipartFile scheduleInfoFile) throws Exception {
-
     this.ingestService.readSubscriptionInfoFile(subsInfoFile);
     this.ingestService.readScheduleInfoFile(scheduleInfoFile);
     UpdateQueries queries = this.correctionService.prepareQueries();

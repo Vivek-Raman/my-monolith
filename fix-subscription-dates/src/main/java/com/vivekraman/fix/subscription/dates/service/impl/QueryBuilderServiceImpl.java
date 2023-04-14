@@ -19,6 +19,8 @@ public class QueryBuilderServiceImpl implements QueryBuilderService {
         }, {
           "$set": {
             "orderProcessingDate": ISODate("%s"),
+            "updatedBy": "BM-5521",
+            "updatedDate": ISODate()
           }
         });
         """.formatted(parameters.getBundleId(), parameters.getSubscriptionId(),
@@ -35,18 +37,31 @@ public class QueryBuilderServiceImpl implements QueryBuilderService {
           "bundleId": "%s",
           "subscriptionId": "%s",
           "orderProcessingDate": ISODate("%s"),
-          "_id": ObjectId("%s")
+          "_id": ObjectId("%s"),
+          "status": "NOT_PROCESSED",
         }, {
           "$set": {
             "status": "FAILED",
-            "failInfo": {
-              TODO
-            }
+            "failInfo.code": "UNSPECIFIED",
+            "failInfo.message": "BM-5521 Fix",
+            "updatedBy": "BM-5521",
+            "updatedDate": ISODate()
           }
+        });
+        db.subscription.updateOne({
+          "subscriptionId": "%s"
+        }, {
+          "$inc": {
+            "processedSchedules": 1,
+          },
+          "$set": {
+            "updatedBy": "BM-5521",
+            "updatedDate": ISODate()
+          },
         });
         """.formatted(parameters.getBundleId(), parameters.getSubscriptionId(),
             DateHelper.buildISO8601DateString(parameters.getPastOrderProcessingDate()),
-            parameters.getScheduleId())
+            parameters.getScheduleId(), parameters.getSubscriptionId())
         .replaceAll("[\n\s]+", " ");
   }
 }
