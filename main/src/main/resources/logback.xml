@@ -7,7 +7,7 @@
   </appender>
 
   <!-- Configure Request and Response logs, visible at DEBUG -->
-  <logger name="com.vivekraman.config.TransactionLoggingFilter" level="debug">
+  <logger name="dev.vivekraman.config.TransactionLoggingFilter" level="debug">
     <appender-ref ref="stdout" />
   </logger>
 
