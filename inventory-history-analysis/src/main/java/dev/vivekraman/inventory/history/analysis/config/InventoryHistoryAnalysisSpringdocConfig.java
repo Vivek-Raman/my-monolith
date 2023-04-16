@@ -11,7 +11,7 @@ public class InventoryHistoryAnalysisSpringdocConfig {
   public GroupedOpenApi inventoryHistoryAnalysisApiGroup() {
     return GroupedOpenApi.builder()
         .group(ApiPath.MODULE_NAME)
-        .packagesToScan("com.vivekraman.inventory.history.analysis.controller")
+        .packagesToScan("dev.vivekraman.inventory.history.analysis.controller")
         .build();
   }
 }

@@ -11,7 +11,7 @@
     <appender-ref ref="stdout" />
   </logger>
 
-  <logger name="com.vivekraman" level="info">
+  <logger name="dev.vivekraman" level="info">
 <!--    <appender-ref ref="stdout" />-->
   </logger>
 

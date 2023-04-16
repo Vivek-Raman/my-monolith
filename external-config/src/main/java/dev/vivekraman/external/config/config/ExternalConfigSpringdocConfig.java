@@ -11,7 +11,7 @@ public class ExternalConfigSpringdocConfig {
   public GroupedOpenApi externalConfigApiGroup() {
     return GroupedOpenApi.builder()
         .group(ApiPath.MODULE_NAME)
-        .packagesToScan("com.vivekraman.external.config.controller")
+        .packagesToScan("dev.vivekraman.external.config.controller")
         .build();
   }
 }

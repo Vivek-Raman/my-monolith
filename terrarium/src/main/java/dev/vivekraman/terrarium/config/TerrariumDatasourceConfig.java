@@ -13,7 +13,7 @@ import org.springframework.transaction.TransactionManager;
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@EnableJpaRepositories(basePackages = "com.vivekraman.terrarium.repository",
+@EnableJpaRepositories(basePackages = "dev.vivekraman.terrarium.repository",
                        entityManagerFactoryRef = "terrariumEntityManagerFactory",
                        transactionManagerRef = "terrariumTransactionManager")
 public class TerrariumDatasourceConfig {
@@ -26,7 +26,7 @@ public class TerrariumDatasourceConfig {
   public LocalContainerEntityManagerFactoryBean terrariumEntityManagerFactory(
       EntityManagerFactoryBuilder builder, @Qualifier("terrariumDataSource") DataSource dataSource) {
     return builder.dataSource(dataSource)
-        .packages("com.vivekraman.terrarium.entity")
+        .packages("dev.vivekraman.terrarium.entity")
         .persistenceUnit("terrarium")
         .build();
   }

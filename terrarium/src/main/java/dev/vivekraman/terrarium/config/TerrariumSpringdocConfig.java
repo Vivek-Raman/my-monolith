@@ -11,7 +11,7 @@ public class TerrariumSpringdocConfig {
   public GroupedOpenApi terrariumApiGroup() {
     return GroupedOpenApi.builder()
         .group(ApiPath.MODULE_NAME)
-        .packagesToScan("com.vivekraman.terrarium.controller")
+        .packagesToScan("dev.vivekraman.terrarium.controller")
         .build();
   }
 }

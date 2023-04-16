@@ -11,7 +11,7 @@ public class FixSubscriptionDatesSpringdocConfig {
   public GroupedOpenApi fixSubscriptionDatesApiGroup() {
     return GroupedOpenApi.builder()
         .group(ApiPath.MODULE_NAME)
-        .packagesToScan("com.vivekraman.fix.subscription.dates.controller")
+        .packagesToScan("dev.vivekraman.fix.subscription.dates.controller")
         .build();
   }
 }

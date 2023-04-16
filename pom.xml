@@ -8,7 +8,7 @@
 		<version>3.0.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.vivekraman</groupId>
+	<groupId>dev.vivekraman</groupId>
 	<artifactId>my-monolith</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -38,37 +38,37 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.vivekraman</groupId>
+				<groupId>dev.vivekraman</groupId>
 				<artifactId>main</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.vivekraman</groupId>
+				<groupId>dev.vivekraman</groupId>
 				<artifactId>my-monolith-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.vivekraman</groupId>
+				<groupId>dev.vivekraman</groupId>
 				<artifactId>inventory-history-analysis</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.vivekraman</groupId>
+				<groupId>dev.vivekraman</groupId>
 				<artifactId>terrarium</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.vivekraman</groupId>
+				<groupId>dev.vivekraman</groupId>
 				<artifactId>external-config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.vivekraman</groupId>
+				<groupId>dev.vivekraman</groupId>
 				<artifactId>fix-subscription-dates</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 <!--			<dependency>-->
-<!--				<groupId>com.vivekraman</groupId>-->
+<!--				<groupId>dev.vivekraman</groupId>-->
 <!--				<artifactId>module-empty-template</artifactId>-->
 <!--				<version>${project.version}</version>-->
 <!--			</dependency>-->
@@ -130,7 +130,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.vivekraman.MyMonolith</mainClass>
+					<mainClass>dev.vivekraman.MyMonolith</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

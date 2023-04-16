@@ -1,5 +1,5 @@
-package com.vivekraman.module.empty.template.constants;
+package dev.vivekraman.module.empty.template.constants;
 
-public interface ApiPath extends com.vivekraman.constants.ApiPath {
+public interface ApiPath extends dev.vivekraman.constants.ApiPath {
   String MODULE_NAME = "module-empty-template";
 }

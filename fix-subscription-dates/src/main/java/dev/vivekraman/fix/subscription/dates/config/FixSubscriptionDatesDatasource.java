@@ -13,7 +13,7 @@ import org.springframework.transaction.TransactionManager;
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@EnableJpaRepositories(basePackages = "com.vivekraman.fix.subscription.dates.repository",
+@EnableJpaRepositories(basePackages = "dev.vivekraman.fix.subscription.dates.repository",
                        entityManagerFactoryRef = "fixSubscriptionDatesEntityManagerFactory",
                        transactionManagerRef = "fixSubscriptionDatesTransactionManager")
 public class FixSubscriptionDatesDatasource {
@@ -27,7 +27,7 @@ public class FixSubscriptionDatesDatasource {
       EntityManagerFactoryBuilder builder,
       @Qualifier("fixSubscriptionDatesDataSource") DataSource dataSource) {
     return builder.dataSource(dataSource)
-        .packages("com.vivekraman.fix.subscription.dates.entity")
+        .packages("dev.vivekraman.fix.subscription.dates.entity")
         .persistenceUnit("template")
         .build();
   }

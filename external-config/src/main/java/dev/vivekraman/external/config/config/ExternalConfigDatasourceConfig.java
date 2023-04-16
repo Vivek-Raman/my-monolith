@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaAuditing
-@EnableJpaRepositories(basePackages = "com.vivekraman.external.config.repository",
+@EnableJpaRepositories(basePackages = "dev.vivekraman.external.config.repository",
                        entityManagerFactoryRef = "externalConfigEntityManagerFactory",
                        transactionManagerRef = "externalConfigTransactionManager")
 public class ExternalConfigDatasourceConfig {
@@ -32,7 +32,7 @@ public class ExternalConfigDatasourceConfig {
       EntityManagerFactoryBuilder builder,
       @Qualifier("externalConfigDataSource") DataSource dataSource) {
     return builder.dataSource(dataSource)
-        .packages("com.vivekraman.external.config.entity")
+        .packages("dev.vivekraman.external.config.entity")
         .persistenceUnit("externalConfig")
         .build();
   }

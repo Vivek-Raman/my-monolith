@@ -16,7 +16,7 @@ public class SpringdocConfig implements GlobalOpenApiCustomizer {
   public GroupedOpenApi commonApiGroup() {
     return GroupedOpenApi.builder()
         .group(API_GROUP)
-        .packagesToScan("com.vivekraman.controller")
+        .packagesToScan("dev.vivekraman.controller")
         .build();
   }
 
@@ -25,7 +25,7 @@ public class SpringdocConfig implements GlobalOpenApiCustomizer {
   public GroupedOpenApi allApiGroup() {
     return GroupedOpenApi.builder()
         .group(ALL_APIS)
-        .packagesToScan("com.vivekraman")
+        .packagesToScan("dev.vivekraman")
         .build();
   }
 
@@ -40,8 +40,8 @@ public class SpringdocConfig implements GlobalOpenApiCustomizer {
 
     Contact contact = new Contact();
     contact.setName("Vivek Raman");
-    contact.setEmail("vr.ac4bf@live.com"); // TODO: replace with a cooler email
-    contact.setUrl("https://twitter.com/VivekRaman__"); // TODO: get a domain
+    contact.setEmail("vr.ac4bf@live.com");
+    contact.setUrl("https://vivekraman.dev");
     info.setContact(contact);
 
     openApi.setInfo(info);

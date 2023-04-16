@@ -1,4 +1,4 @@
-package com.vivekraman.module.empty.template.config;
+package dev.vivekraman.module.empty.template.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,7 @@ import org.springframework.transaction.TransactionManager;
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@EnableJpaRepositories(basePackages = "com.vivekraman.module.empty.template.repository",
+@EnableJpaRepositories(basePackages = "dev.vivekraman.module.empty.template.repository",
                        entityManagerFactoryRef = "templateEntityManagerFactory",
                        transactionManagerRef = "templateTransactionManager")
 public class TemplateDatasource {
@@ -27,7 +27,7 @@ public class TemplateDatasource {
       EntityManagerFactoryBuilder builder,
       @Qualifier("templateDataSource") DataSource dataSource) {
     return builder.dataSource(dataSource)
-        .packages("com.vivekraman.module.empty.template.entity")
+        .packages("dev.vivekraman.module.empty.template.entity")
         .persistenceUnit("template")
         .build();
   }

@@ -13,7 +13,7 @@ import org.springframework.transaction.TransactionManager;
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@EnableJpaRepositories(basePackages = "com.vivekraman.inventory.history.analysis.repository",
+@EnableJpaRepositories(basePackages = "dev.vivekraman.inventory.history.analysis.repository",
                        entityManagerFactoryRef = "inventoryHistoryAnalysisEntityManagerFactory",
                        transactionManagerRef = "inventoryHistoryAnalysisTransactionManager")
 public class InventoryHistoryAnalysisDatasourceConfig {
@@ -27,7 +27,7 @@ public class InventoryHistoryAnalysisDatasourceConfig {
       EntityManagerFactoryBuilder builder,
       @Qualifier("inventoryHistoryAnalysisDataSource") DataSource dataSource) {
     return builder.dataSource(dataSource)
-        .packages("com.vivekraman.inventory.history.analysis.entity")
+        .packages("dev.vivekraman.inventory.history.analysis.entity")
         .persistenceUnit("inventoryHistoryAnalysis")
         .build();
   }
