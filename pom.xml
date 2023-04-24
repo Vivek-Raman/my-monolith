@@ -26,7 +26,7 @@
 	<properties>
 		<java.version>20</java.version>
 		<apache-poi.version>5.2.2</apache-poi.version>
-		<springdoc.version>2.0.4</springdoc.version>
+		<springdoc.version>2.1.0</springdoc.version>
 	</properties>
 
 	<dependencyManagement>
