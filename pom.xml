@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>dev.vivekraman</groupId>
 	<artifactId>my-monolith</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-rc1</version>
 	<packaging>pom</packaging>
 	<name>my-monolith</name>
 	<description>Vivek's monolithic backend service</description>
@@ -18,15 +18,13 @@
 		<module>main</module>
 		<module>external-config</module>
 		<module>my-monolith-common</module>
-		<module>inventory-history-analysis</module>
     <module>terrarium</module>
-		<module>fix-subscription-dates</module>
     <!--		<module>module-empty-template</module>-->
   </modules>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 		<apache-poi.version>5.2.2</apache-poi.version>
-		<springdoc.version>2.0.4</springdoc.version>
+		<springdoc.version>2.1.0</springdoc.version>
 	</properties>
 
 	<dependencyManagement>
@@ -49,22 +47,12 @@
 			</dependency>
 			<dependency>
 				<groupId>dev.vivekraman</groupId>
-				<artifactId>inventory-history-analysis</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>dev.vivekraman</groupId>
 				<artifactId>terrarium</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>dev.vivekraman</groupId>
 				<artifactId>external-config</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>dev.vivekraman</groupId>
-				<artifactId>fix-subscription-dates</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 <!--			<dependency>-->

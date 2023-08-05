@@ -1,5 +1,6 @@
 package dev.vivekraman.terrarium.controller;
 
+import dev.vivekraman.terrarium.constants.TerriariumApiPath;
 import dev.vivekraman.terrarium.model.requests.UserIdentifierRequest;
 import dev.vivekraman.terrarium.model.responses.BooleanResponse;
 import dev.vivekraman.terrarium.model.responses.UserAuthenticationResponse;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping(TerriariumApiPath.BASE_URL + "/user")
 public class UserController {
 
   @Autowired

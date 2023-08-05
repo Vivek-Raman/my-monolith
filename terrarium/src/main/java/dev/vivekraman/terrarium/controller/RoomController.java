@@ -1,5 +1,6 @@
 package dev.vivekraman.terrarium.controller;
 
+import dev.vivekraman.terrarium.constants.TerriariumApiPath;
 import dev.vivekraman.terrarium.model.requests.CreateNewPlantInRoomRequest;
 import dev.vivekraman.terrarium.model.responses.RoomResponse;
 import dev.vivekraman.terrarium.entity.Plant;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/room")
+@RequestMapping(TerriariumApiPath.BASE_URL + "/room")
 public class RoomController {
 
   @Autowired
