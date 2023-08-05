@@ -1,6 +1,6 @@
 package dev.vivekraman.terrarium.controller;
 
-import dev.vivekraman.terrarium.constants.TerriariumApiPath;
+import dev.vivekraman.terrarium.constants.ApiPath;
 import dev.vivekraman.terrarium.model.requests.AddActionRequest;
 import dev.vivekraman.terrarium.model.responses.BooleanResponse;
 import dev.vivekraman.terrarium.entity.Plant;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(TerriariumApiPath.BASE_URL + "/action")
-public class ActionController implements TerriariumApiPath {
+@RequestMapping(ApiPath.BASE_URL + "/action")
+public class ActionController implements ApiPath {
 
   @Autowired
   private PlantService plantService;

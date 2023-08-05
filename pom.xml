@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.4</version>
+		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.vivekraman</groupId>
@@ -22,8 +22,7 @@
     <!--		<module>module-empty-template</module>-->
   </modules>
 	<properties>
-		<java.version>17</java.version>
-		<apache-poi.version>5.2.2</apache-poi.version>
+		<java.version>20</java.version>
 		<springdoc.version>2.1.0</springdoc.version>
 	</properties>
 
@@ -111,23 +110,4 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>dev.vivekraman.MyMonolith</mainClass>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>
