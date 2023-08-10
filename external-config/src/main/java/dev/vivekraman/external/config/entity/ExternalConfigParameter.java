@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,11 +25,10 @@ import java.util.Date;
 @Entity(name = "external-config-parameter")
 @Table(name = "external-config-parameter")
 public class ExternalConfigParameter implements Serializable {
-  @Serial
   private static final long serialVersionUID = -567703283814445120L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private String id;
 
   @Column(name = "created_on")

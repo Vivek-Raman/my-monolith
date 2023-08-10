@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>external-config</artifactId>
+  <packaging>jar</packaging>
 
   <properties>
     <maven.compiler.source>${java.version}</maven.compiler.source>

@@ -1,5 +1,6 @@
 package dev.vivekraman.terrarium.entity;
 
+import dev.vivekraman.terrarium.constants.ApiPath;
 import dev.vivekraman.terrarium.model.requests.UserIdentifierRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "app_user")
+@Table(name = ApiPath.MODULE_NAME + "_app_user")
 public class User {
 
   @Id

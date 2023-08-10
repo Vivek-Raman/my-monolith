@@ -31,7 +31,7 @@ public class SpringdocConfig implements InitializingBean {
         .build();
   }
 
-  @Value("${application.version}") private String version;
+  @Value("${spring.application.version}") private String version;
 
   @Bean
   public GlobalOpenApiCustomizer globalOpenApiCustomizer() {

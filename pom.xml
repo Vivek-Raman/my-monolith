@@ -19,95 +19,123 @@
 		<module>external-config</module>
 		<module>my-monolith-common</module>
     <module>terrarium</module>
-    <!--		<module>module-empty-template</module>-->
   </modules>
-	<properties>
-		<java.version>20</java.version>
-		<springdoc.version>2.1.0</springdoc.version>
-	</properties>
+  <properties>
+    <java.version>17</java.version>
+    <springdoc.version>2.1.0</springdoc.version>
+    <start-class>dev.vivekraman.MyMonolith</start-class>
+  </properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.fasterxml.jackson.dataformat</groupId>
-				<artifactId>jackson-dataformat-csv</artifactId>
-				<version>${jackson-bom.version}</version>
-			</dependency>
+  <dependencyManagement>
+    <dependencies>
+      <!--  START MODULES  -->
+      <dependency>
+        <groupId>dev.vivekraman</groupId>
+        <artifactId>main</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.vivekraman</groupId>
+        <artifactId>my-monolith-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.vivekraman</groupId>
+        <artifactId>terrarium</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.vivekraman</groupId>
+        <artifactId>external-config</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <!--			<dependency>-->
+      <!--				<groupId>dev.vivekraman</groupId>-->
+      <!--				<artifactId>module-empty-template</artifactId>-->
+      <!--				<version>${project.version}</version>-->
+      <!--			</dependency>-->
 
-			<dependency>
-				<groupId>dev.vivekraman</groupId>
-				<artifactId>main</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>dev.vivekraman</groupId>
-				<artifactId>my-monolith-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>dev.vivekraman</groupId>
-				<artifactId>terrarium</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>dev.vivekraman</groupId>
-				<artifactId>external-config</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-<!--			<dependency>-->
-<!--				<groupId>dev.vivekraman</groupId>-->
-<!--				<artifactId>module-empty-template</artifactId>-->
-<!--				<version>${project.version}</version>-->
-<!--			</dependency>-->
-		</dependencies>
-	</dependencyManagement>
+      <!--  END MODULES  -->
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
+      <!--  START DEPENDENCIES  -->
+      <!--  END DEPENDENCIES  -->
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${springdoc.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-	  <dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>${springdoc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok-maven-plugin</artifactId>
+        <version>1.18.20.0</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>delombok</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <finalName>my-monolith</finalName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

@@ -1,6 +1,7 @@
 package dev.vivekraman.terrarium.entity;
 
 
+import dev.vivekraman.terrarium.constants.ApiPath;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "app_user_session")
+@Table(name = ApiPath.MODULE_NAME + "_app_user_session")
 public class Session {
   @Id
   @Column(name = "session_id")

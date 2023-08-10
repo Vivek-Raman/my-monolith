@@ -10,7 +10,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.TransactionManager;
 
-import javax.sql.DataSource;
+import jakarta.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
 @EnableJpaRepositories(basePackages = "dev.vivekraman.module.empty.template.repository",

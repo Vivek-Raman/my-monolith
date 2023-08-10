@@ -1,5 +1,6 @@
 package dev.vivekraman.terrarium.entity;
 
+import dev.vivekraman.terrarium.constants.ApiPath;
 import dev.vivekraman.terrarium.entity.utils.ActionType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_user_action")
+@Table(name = ApiPath.MODULE_NAME + "_app_user_action")
 public class Action {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
