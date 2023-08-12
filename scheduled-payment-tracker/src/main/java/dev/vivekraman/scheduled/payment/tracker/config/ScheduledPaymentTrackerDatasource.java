@@ -27,8 +27,8 @@ public class ScheduledPaymentTrackerDatasource {
       EntityManagerFactoryBuilder builder,
       @Qualifier("templateDataSource") DataSource dataSource) {
     return builder.dataSource(dataSource)
-        .packages("dev.vivekraman.module.empty.template.entity")
-        .persistenceUnit("template")
+        .packages("dev.vivekraman.scheduled.payment.tracker.entity")
+        .persistenceUnit("scheduledPaymentTracker")
         .build();
   }
 

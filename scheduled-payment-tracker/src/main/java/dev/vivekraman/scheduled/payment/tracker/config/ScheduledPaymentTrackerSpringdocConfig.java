@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ScheduledPaymentTrackerSpringdocConfig {
   @Bean
-  public GroupedOpenApi templateApiGroup() {
+  public GroupedOpenApi scheduledPaymentTrackerApiGroup() {
     return GroupedOpenApi.builder()
         .group(ApiPath.MODULE_NAME)
         .packagesToScan("dev.vivekraman.scheduled.payment.tracker.controller")
