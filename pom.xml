@@ -19,6 +19,7 @@
 		<module>external-config</module>
 		<module>my-monolith-common</module>
     <module>terrarium</module>
+    <module>scheduled-payment-tracker</module>
   </modules>
   <properties>
     <java.version>17</java.version>
@@ -49,6 +50,11 @@
         <artifactId>external-config</artifactId>
         <version>${project.version}</version>
       </dependency>
+      			<dependency>
+      				<groupId>dev.vivekraman</groupId>
+      				<artifactId>scheduled-payment-tracker</artifactId>
+      				<version>${project.version}</version>
+      			</dependency>
       <!--			<dependency>-->
       <!--				<groupId>dev.vivekraman</groupId>-->
       <!--				<artifactId>module-empty-template</artifactId>-->

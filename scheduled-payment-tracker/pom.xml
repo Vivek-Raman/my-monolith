@@ -9,7 +9,7 @@
     <version>1.0.0-rc1</version>
   </parent>
 
-  <artifactId>main</artifactId>
+  <artifactId>scheduled-payment-tracker</artifactId>
 
   <properties>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -18,28 +18,9 @@
   </properties>
 
   <dependencies>
-
-    <!-- Import all the modules here -->
     <dependency>
       <groupId>dev.vivekraman</groupId>
       <artifactId>my-monolith-common</artifactId>
     </dependency>
-    <dependency>
-      <groupId>dev.vivekraman</groupId>
-      <artifactId>terrarium</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>dev.vivekraman</groupId>
-      <artifactId>external-config</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>dev.vivekraman</groupId>
-      <artifactId>scheduled-payment-tracker</artifactId>
-    </dependency>
-<!--    <dependency>-->
-<!--      <groupId>dev.vivekraman</groupId>-->
-<!--      <artifactId>module-empty-template</artifactId>-->
-<!--    </dependency>-->
   </dependencies>
-
 </project>
