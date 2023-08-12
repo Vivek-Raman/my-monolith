@@ -1,6 +1,6 @@
 runtime: java17
 instance_class: F1
-entrypoint: java -Xmx512m -jar main/target/my-monolith.jar -Dapplication.production=true
+entrypoint: java -Xmx512m -jar main/target/my-monolith.jar -Dapplication.production=true spring.main.banner-mode=off
 includes:
   - secrets.yaml
 
