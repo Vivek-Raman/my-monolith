@@ -1,6 +1,6 @@
 runtime: java17
 instance_class: F1
-entrypoint: java -Xmx512m -jar main/target/my-monolith.jar
+entrypoint: java -Xmx512m -jar main/target/my-monolith.jar -Dapplication.production=true
 includes:
   - secrets.yaml
 
