@@ -3,7 +3,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 *.versionsBackup
-dependency-reduced-pom.xml
 
 ### STS ###
 .apt_generated
@@ -33,4 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-secrets.yaml
+secrets.sh

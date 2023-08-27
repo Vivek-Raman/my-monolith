@@ -1,4 +1,4 @@
-create table terrarium_app_user
+create table if not exists terrarium_app_user
 (
     user_id   uuid not null,
     password  varchar(255),
@@ -6,7 +6,7 @@ create table terrarium_app_user
     user_name varchar(255),
     primary key (user_id)
 );
-create table terrarium_app_user_action
+create table if not exists terrarium_app_user_action
 (
     action_id   uuid not null,
     action_type smallint check (action_type between 0 and 3),
@@ -15,14 +15,14 @@ create table terrarium_app_user_action
     user_id     uuid,
     primary key (action_id)
 );
-create table terrarium_app_user_session
+create table if not exists terrarium_app_user_session
 (
     session_id uuid not null,
     timestamp  timestamp(6),
     user_id    uuid,
     primary key (session_id)
 );
-create table terrarium_plant
+create table if not exists terrarium_plant
 (
     plant_id            uuid not null,
     date_of_planting    timestamp(6),

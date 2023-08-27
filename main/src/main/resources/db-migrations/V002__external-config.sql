@@ -1,4 +1,4 @@
-create table "external-config-parameter"
+create table if not exists "external_config_parameter"
 (
     id           varchar(255) not null,
     config_key   varchar(255) not null,
@@ -8,8 +8,8 @@ create table "external-config-parameter"
     primary key (id)
 );
 
-alter table if exists "external-config-parameter"
+alter table if exists "external_config_parameter"
     drop constraint if exists UK_l8y7p0wiubd4k85ljii4qv56d;
-alter table if exists "external-config-parameter"
+alter table if exists "external_config_parameter"
     add constraint UK_l8y7p0wiubd4k85ljii4qv56d unique (config_key);
-create sequence "external-config-parameter_SEQ" start with 1 increment by 50;
+create sequence if not exists "external_config_parameter_SEQ" start with 1 increment by 50;
